@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Cars Panel</title>
+</head>
+<body>
+    <h1>Cars panel</h1>
+    <h3>Rented cars:</h3>
+        <ul>
+            <li>Empty</li>
+        </ul>
+    <h3>Available cars:</h3>
+        <ul>
+            {% for car in cars %}
+            <li>{{ car.model }} : {{ car.plate }}</li>
+            {% endfor %}
+        </ul>
+
+    <form action="{% url 'cars_register' %}">
+        <input type="submit" value="Register Car">
+    </form>
+</body>
+</html>

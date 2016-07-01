@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Cars register</title>
+</head>
+<body>
+    <h2>Welcome to cars register</h2>
+
+    <form action="{% url 'cars_submit' %}" method="post" >
+        {% csrf_token %}
+        <p>
+            <label for="inputModel">Model: </label>
+            <input id="inputModel" type="text" name="inputModel" value="">
+        </p>
+        <p>
+            <label for="inputPlate">Plate: </label>
+            <input id="inputPlate" type="text" name="inputPlate" value="">
+        </p>
+        <p>
+            <label for="inputBrand">Brand: </label>
+            <input id="inputBrand" type="text" name="inputBrand" value="">
+        </p>
+        <p>
+            <label for="inputColor">Color: </label>
+            <input id="inputColor" type="text" name="inputColor" value="">
+        </p>
+        <p>
+            <label for="inputPrice">Price per day: </label>
+            <input id="inputPrice" type="text" name="inputPrice" value="">
+        </p>
+        <input type="submit" value="OK">
+    </form>
+</body>
+</html>
