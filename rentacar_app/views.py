@@ -14,7 +14,7 @@ def customers(request):
 
 def customers_register(request):
     form = CustomerForm()
-    context = {"form": form}
+    context = {'form': form}
     return render(request, 'rentacar_app/customers_register.html', context)
 
 def customer_submit(request):
@@ -23,19 +23,19 @@ def customer_submit(request):
 
         if form.is_valid():
             customer = Customer()
-            customer.name = form.cleaned_data['inputName']
-            customer.cpf = form.cleaned_data['inputCPF']
-            customer.birthday = form.cleaned_data['inputBirthday']
+            customer.name = form.cleaned_data['input_name']
+            customer.cpf = form.cleaned_data['input_cpf']
+            customer.birthday = form.cleaned_data['input_birthday']
             customer.save()
 
-            return redirect("customers")
+            return redirect('customers')
 
         else:
-            return HttpResponse("Error")
+            return HttpResponse('Error')
 
 def cars(request):
     cars = Car.objects.all()
-    context = {"cars": cars}
+    context = {'cars': cars}
     return render(request, 'rentacar_app/cars.html', context)
 
 def cars_remove(request):
@@ -47,7 +47,7 @@ def cars_remove(request):
 
 def cars_register(request):
     form = CarForm()
-    context = {"form": form}
+    context = {'form': form}
     return render(request, 'rentacar_app/cars_register.html', context)
 
 def car_submit(request):
@@ -56,13 +56,13 @@ def car_submit(request):
 
         if form.is_valid():
             car = Car()
-            car.plate = form.cleaned_data["inputPlate"]
-            car.model = form.cleaned_data["inputModel"]
-            car.brand = form.cleaned_data["inputBrand"]
-            car.color = form.cleaned_data["inputColor"]
-            car.price_per_day = float(form.cleaned_data["inputPrice"])
+            car.plate = form.cleaned_data['input_plate']
+            car.model = form.cleaned_data['input_model']
+            car.brand = form.cleaned_data['input_brand']
+            car.color = form.cleaned_data['input_color']
+            car.price_per_day = float(form.cleaned_data['input_price'])
             car.save()
 
-            return redirect("cars")
+            return redirect('cars')
         else:
-            return HttpResponse("Error")
+            return HttpResponse('Error')
