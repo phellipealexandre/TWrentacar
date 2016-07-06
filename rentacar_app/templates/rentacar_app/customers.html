@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Cars Panel</title>
+</head>
+<body>
+    <h1>Customer panel</h1>
+    <h3>Registered users:</h3>
+        <ul>
+            {% for customer in customers %}
+            <li>{{customer.name}} - {{customer.birthday}} - {{customer.cpf}}</li>
+            {% endfor %}
+        </ul>
+
+    <form action="{% url 'customers_register' %}">
+        <input type="submit" value="Register Customer">
+    </form>
+</body>
+</html>

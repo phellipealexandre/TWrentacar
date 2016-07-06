@@ -2,12 +2,12 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Cars register</title>
+    <title>Customers register</title>
 </head>
 <body>
-    <h2>Welcome to cars register</h2>
+    <h2>Welcome to customer register panel</h2>
 
-    <form action="{% url 'cars_submit' %}" method="post" >
+    <form action="{% url 'customers_submit' %}" method="post" >
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="OK">
