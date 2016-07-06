@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^customers/submit/$', views.customer_submit, name='customers_submit'),
     url(r'^cars/$', views.cars, name='cars'),
     url(r'^cars/register/$', views.cars_register, name='cars_register'),
+    url(r'^cars/remove/$', views.cars_remove, name='cars_remove'),
     url(r'^cars/submit/$', views.car_submit, name='cars_submit'),
 ]

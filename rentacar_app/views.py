@@ -31,12 +31,19 @@ def customer_submit(request):
             return redirect("customers")
 
         else:
-            return HttpResponse("Erro")
+            return HttpResponse("Error")
 
 def cars(request):
     cars = Car.objects.all()
     context = {"cars": cars}
     return render(request, 'rentacar_app/cars.html', context)
+
+def cars_remove(request):
+    if request.method == 'POST':
+        car_id = request.POST['car_id']
+        car = Car.objects.get(pk=car_id)
+        car.delete()
+        return redirect('cars')
 
 def cars_register(request):
     form = CarForm()
@@ -57,3 +64,5 @@ def car_submit(request):
             car.save()
 
             return redirect("cars")
+        else:
+            return HttpResponse("Error")

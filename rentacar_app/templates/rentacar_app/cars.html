@@ -13,7 +13,14 @@
     <h3>Available cars:</h3>
         <ul>
             {% for car in cars %}
-            <li>{{ car.model }} : {{ car.plate }}</li>
+            <li>{{ car.model }} : {{ car.plate }}
+                <form action="{% url 'cars_remove' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{car.id}}" name="car_id">
+                    <input type="submit" value="Remove" >
+                </form>
+            </li>
+
             {% endfor %}
         </ul>
 
