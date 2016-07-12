@@ -8,9 +8,19 @@
     <h1>Customer panel</h1>
     <h3>Registered users:</h3>
         <ul>
-            {% for customer in customers %}
-            <li>{{customer.name}} - {{customer.birthday}} - {{customer.cpf}}</li>
-            {% endfor %}
+            {% if customers %}
+                {% for customer in customers %}
+                    <li>{{customer.name}} - {{customer.birthday}} - [{{customer.cpf}}]
+                         <form action="{% url 'customers_remove' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{customer.id}}" name="customer_id">
+                            <input type="submit" value="Remove" >
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>Empty</li>
+            {% endif %}
         </ul>
 
     <form action="{% url 'customers_register' %}">

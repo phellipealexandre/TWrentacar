@@ -17,6 +17,13 @@ def customers_register(request):
     context = {'form': form}
     return render(request, 'rentacar_app/customers_register.html', context)
 
+def customers_remove(request):
+    if request.method == 'POST':
+        customer_id = request.POST['customer_id']
+        customer = Customer.objects.get(pk=customer_id)
+        customer.delete()
+        return redirect('customers')
+
 def customer_submit(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
