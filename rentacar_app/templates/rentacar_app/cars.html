@@ -20,12 +20,17 @@
                             <input type="hidden" value="{{car.id}}" name="car_id">
                             <input type="submit" value="Remove" >
                         </form>
+
+                        <form action="{% url 'cars_register' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{car.id}}" name="car_id">
+                            <input type="submit" value="Edit" >
+                        </form>
                     </li>
                 {% endfor %}
             {% else %}
                 <li>Empty</li>
             {% endif %}
-
         </ul>
 
     <form action="{% url 'cars_register' %}">

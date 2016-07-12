@@ -10,6 +10,7 @@
     <form action="{% url 'cars_submit' %}" method="post" >
         {% csrf_token %}
         {{form.as_p}}
+        <input type="hidden" value="{{form.input_id}}" name="car_id">
         <input type="submit" value="OK">
     </form>
 </body>

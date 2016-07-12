@@ -16,6 +16,12 @@
                             <input type="hidden" value="{{customer.id}}" name="customer_id">
                             <input type="submit" value="Remove" >
                         </form>
+
+                        <form action="{% url 'customers_register' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{customer.id}}" name="customer_id">
+                            <input type="submit" value="Edit" >
+                        </form>
                     </li>
                 {% endfor %}
             {% else %}
