@@ -33,7 +33,7 @@ def customers_remove(request):
         customer.delete()
         return redirect('customers')
 
-def customer_submit(request):
+def customers_submit(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
 
@@ -83,7 +83,7 @@ def cars_register(request):
 
     return render(request, 'rentacar_app/cars_register.html', context)
 
-def car_submit(request):
+def cars_submit(request):
     if request.method == 'POST':
         form = CarForm(request.POST)
 
@@ -105,7 +105,7 @@ def car_submit(request):
         else:
             return HttpResponse('Error. The form is not valid, please try again')
 
-def car_rent(request):
+def cars_rent(request):
     if request.method == 'POST':
         form = RentForm()
         context = {'form': form, 'car_id': request.POST['car_id']}
