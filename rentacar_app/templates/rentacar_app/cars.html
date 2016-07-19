@@ -8,13 +8,31 @@
     <h1>Cars panel</h1>
     <h3>Rented cars:</h3>
         <ul>
-            <li>Empty</li>
+            {% if rented_cars %}
+                {% for car in rented_cars %}
+                    <li>{{ car.model }} : {{ car.plate }}
+                        <form action="{% url 'rent_return' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{car.id}}" name="car_id">
+                            <input type="submit" value="Return" >
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>Empty</li>
+            {% endif %}
         </ul>
     <h3>Available cars:</h3>
         <ul>
-            {% if cars %}
-                {% for car in cars %}
+            {% if available_cars %}
+                {% for car in available_cars %}
                     <li>{{ car.model }} : {{ car.plate }}
+                        <form action="{% url 'cars_rent' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{car.id}}" name="car_id">
+                            <input type="submit" value="Rent" >
+                        </form>
+
                         <form action="{% url 'cars_remove' %}" method="post" style="display: inline;">
                             {% csrf_token %}
                             <input type="hidden" value="{{car.id}}" name="car_id">

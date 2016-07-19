@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Car rental</title>
+</head>
+<body>
+    <h2>Welcome to cars rental page</h2>
+    <form action="{% url 'rent_submit' %}" method="post" >
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="hidden" value="{{car_id}}" name="car_id">
+        <input type="submit" value="OK">
+    </form>
+</body>
+</html>

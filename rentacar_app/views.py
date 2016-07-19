@@ -1,6 +1,7 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
-from .models import Car, Customer
-from .forms import CarForm, CustomerForm
+from .models import Car, Customer, Rent
+from .forms import CarForm, CustomerForm, RentForm
 from django.http import HttpResponse
 
 def index(request):
@@ -55,7 +56,11 @@ def customer_submit(request):
 
 def cars(request):
     cars = Car.objects.all()
-    context = {'cars': cars}
+    rents = Rent.objects.all()
+    rented_cars = [rent.car for rent in rents]
+    available_cars = [car for car in cars if car not in rented_cars]
+
+    context = {'available_cars': available_cars, 'rented_cars': rented_cars}
     return render(request, 'rentacar_app/cars.html', context)
 
 def cars_remove(request):
@@ -99,3 +104,33 @@ def car_submit(request):
             return redirect('cars')
         else:
             return HttpResponse('Error. The form is not valid, please try again')
+
+def car_rent(request):
+    if request.method == 'POST':
+        form = RentForm()
+        context = {'form': form, 'car_id': request.POST['car_id']}
+        return render(request, 'rentacar_app/cars_rent.html', context)
+
+def rent_submit(request):
+    if request.method == 'POST':
+        form = RentForm(request.POST)
+        if form.is_valid():
+            customer_id = form.cleaned_data['input_customer']
+            car_id = request.POST['car_id']
+            rent = Rent()
+            rent.car = Car.objects.get(pk=car_id)
+            rent.customer = Customer.objects.get(pk=customer_id)
+            rent.rent_date = datetime.now()
+            rent.numberOfRentalDays = form.cleaned_data['input_number_of_days']
+            rent.save()
+            return redirect('cars')
+
+        else:
+            return HttpResponse('Something went wrong')
+
+def rent_return(request):
+    if request.method == 'POST':
+        car = Car.objects.get(pk=request.POST['car_id'])
+        rent = Rent.objects.get(car=car)
+        rent.delete()
+        return redirect('cars')
