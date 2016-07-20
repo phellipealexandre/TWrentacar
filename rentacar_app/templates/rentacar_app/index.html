@@ -1,33 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <title>TW Rent a Car</title>
-    </head>
-
-    <body>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <div class="navbar-brand">TW Rent a Car</div>
-            </div>
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'customers' %}">Customers Panel</a></li>
-              <li><a href="{% url 'cars' %}">Cars Panel</a></li>
-            </ul>
-
-          </div>
-        </nav>
-
+{% extends "rentacar_app/base_with_navbar.html" %}
+    {% block active_index %}active{% endblock %}
+    {% block body %}
         <div class="container">
             <h1>Welcome to TW rent a car</h1>
             <h3>The place where you can rent your favorite cars!</h3>
         </div>
-    </body>
-</html>
+    {% endblock %}

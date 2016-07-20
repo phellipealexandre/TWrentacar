@@ -1,60 +1,58 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>Cars Panel</title>
-</head>
-<body>
-    <h1>Cars panel</h1>
-    <h3>Rented cars:</h3>
-        <ul>
-            {% load custom_date_filters %}
-            {% if rents %}
-                {% for rent in rents %}
-                    <li>{{ rent.car.model }} : {{ rent.car.plate }} rented to {{ rent.customer.name }}
-                        until {{ rent.rent_date|datetime_increment_days:rent.numberOfRentalDays }}
-                        <form action="{% url 'rent_return' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{rent.car.id}}" name="car_id">
-                            <input type="submit" value="Return car" >
-                        </form>
-                    </li>
-                {% endfor %}
-            {% else %}
-                <li>Empty</li>
-            {% endif %}
-        </ul>
-    <h3>Available cars:</h3>
-        <ul>
-            {% if available_cars %}
-                {% for car in available_cars %}
-                    <li>{{ car.model }} : {{ car.plate }}
-                        <form action="{% url 'cars_rent' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{car.id}}" name="car_id">
-                            <input type="submit" value="Rent" >
-                        </form>
+{% extends "rentacar_app/base_with_navbar.html" %}
+    {% block active_car %}active{% endblock %}
+    {% block body %}
+        <div style="padding-left:20px">
+        <h1>Cars panel</h1>
+        <h3>Rented cars:</h3>
 
-                        <form action="{% url 'cars_remove' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{car.id}}" name="car_id">
-                            <input type="submit" value="Remove" >
-                        </form>
+            <ul>
+                {% load custom_date_filters %}
+                {% if rents %}
+                    {% for rent in rents %}
+                        <li>{{ rent.car.model }} : {{ rent.car.plate }} rented to {{ rent.customer.name }}
+                            until {{ rent.rent_date|datetime_increment_days:rent.numberOfRentalDays }}
+                            <form action="{% url 'rent_return' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{rent.car.id}}" name="car_id">
+                                <input type="submit" value="Return car" >
+                            </form>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>Empty</li>
+                {% endif %}
+            </ul>
+        <h3>Available cars:</h3>
+            <ul>
+                {% if available_cars %}
+                    {% for car in available_cars %}
+                        <li>{{ car.model }} : {{ car.plate }}
+                            <form action="{% url 'cars_rent' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{car.id}}" name="car_id">
+                                <input type="submit" value="Rent" >
+                            </form>
 
-                        <form action="{% url 'cars_register' %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{car.id}}" name="car_id">
-                            <input type="submit" value="Edit" >
-                        </form>
-                    </li>
-                {% endfor %}
-            {% else %}
-                <li>Empty</li>
-            {% endif %}
-        </ul>
+                            <form action="{% url 'cars_remove' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{car.id}}" name="car_id">
+                                <input type="submit" value="Remove" >
+                            </form>
 
-    <form action="{% url 'cars_register' %}">
-        <input type="submit" value="Register Car">
-    </form>
-</body>
-</html>
+                            <form action="{% url 'cars_register' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{car.id}}" name="car_id">
+                                <input type="submit" value="Edit" >
+                            </form>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>Empty</li>
+                {% endif %}
+            </ul>
+
+        <form action="{% url 'cars_register' %}">
+            <input type="submit" value="Register Car">
+        </form>
+        </div>
+    {% endblock %}
