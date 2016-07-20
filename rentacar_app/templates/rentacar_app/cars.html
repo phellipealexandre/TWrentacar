@@ -8,13 +8,15 @@
     <h1>Cars panel</h1>
     <h3>Rented cars:</h3>
         <ul>
-            {% if rented_cars %}
-                {% for car in rented_cars %}
-                    <li>{{ car.model }} : {{ car.plate }}
+            {% load custom_date_filters %}
+            {% if rents %}
+                {% for rent in rents %}
+                    <li>{{ rent.car.model }} : {{ rent.car.plate }} rented to {{ rent.customer.name }}
+                        until {{ rent.rent_date|datetime_increment_days:rent.numberOfRentalDays }}
                         <form action="{% url 'rent_return' %}" method="post" style="display: inline;">
                             {% csrf_token %}
-                            <input type="hidden" value="{{car.id}}" name="car_id">
-                            <input type="submit" value="Return" >
+                            <input type="hidden" value="{{rent.car.id}}" name="car_id">
+                            <input type="submit" value="Return car" >
                         </form>
                     </li>
                 {% endfor %}

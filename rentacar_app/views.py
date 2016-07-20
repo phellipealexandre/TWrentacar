@@ -60,7 +60,7 @@ def cars(request):
     rented_cars = [rent.car for rent in rents]
     available_cars = [car for car in cars if car not in rented_cars]
 
-    context = {'available_cars': available_cars, 'rented_cars': rented_cars}
+    context = {'available_cars': available_cars, 'rents': rents}
     return render(request, 'rentacar_app/cars.html', context)
 
 def cars_remove(request):
