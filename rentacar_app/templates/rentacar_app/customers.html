@@ -11,15 +11,16 @@
                                  <form action="{% url 'customers_remove' %}" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" value="{{customer.id}}" name="customer_id">
-                                    <input type="submit" value="Remove" >
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Remove" >
                                 </form>
 
                                 <form action="{% url 'customers_register' %}" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" value="{{customer.id}}" name="customer_id">
-                                    <input type="submit" value="Edit" >
+                                    <input class="btn btn-primary btn-sm" type="submit" value="Edit" >
                                 </form>
                             </li>
+                            <p/>
                         {% endfor %}
                     {% else %}
                         <li>Empty</li>
@@ -27,7 +28,7 @@
                 </ul>
 
             <form action="{% url 'customers_register' %}">
-                <input type="submit" value="Register Customer">
+                <input class="btn btn-primary" type="submit" value="Register Customer">
             </form>
         </div>
     {% endblock %}
